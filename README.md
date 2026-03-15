@@ -1,8 +1,8 @@
-Cloud Cost Optimization Platform
+# Cloud Cost Optimization Platform
 
 A FinOps tool that detects wasted AWS resources and highlights potential cost savings.
 
-Features
+Features:
 
 Detects idle EC2 instances (CPU < 5% for 7 days)
 
@@ -16,7 +16,7 @@ Displays savings insights via Grafana dashboard
 
 Sends Slack alerts
 
-Tech Stack
+Tech Stack:
 
 Python 3
 
@@ -38,7 +38,7 @@ finops-tool/
 ├── dashboard/       # Grafana dashboard
 ├── lambda_handler.py
 └── requirements.txt
-Setup
+Setup:
 git clone https://github.com/YOUR_USERNAME/finops-tool.git
 cd finops-tool
 python3 -m venv venv
