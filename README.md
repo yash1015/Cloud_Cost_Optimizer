@@ -1,4 +1,4 @@
-# FinOps Cost Optimization Platform
+#  Cost Optimization Platform
 
 A cloud cost optimization tool that automatically detects AWS resource waste and visualizes savings opportunities.
 
