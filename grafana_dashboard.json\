@@ -1,0 +1,338 @@
+{
+  "title": "FinOps Cost Optimization",
+  "tags": [
+    "finops",
+    "aws",
+    "cost"
+  ],
+  "timezone": "browser",
+  "refresh": "5m",
+  "schemaVersion": 38,
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Total Monthly Waste (USD)",
+      "type": "stat",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": "cloudwatch",
+      "targets": [
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "TotalMonthlyWaste",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "title": "Total Findings",
+      "type": "stat",
+      "gridPos": {
+        "x": 6,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": "cloudwatch",
+      "targets": [
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "TotalFindings",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "K8s Monthly Savings Opportunity",
+      "type": "stat",
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": "cloudwatch",
+      "targets": [
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "K8sMonthlySaving",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "EC2 Monthly Savings Opportunity",
+      "type": "stat",
+      "gridPos": {
+        "x": 18,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": "cloudwatch",
+      "targets": [
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "EC2MonthlySaving",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "Findings by Service",
+      "type": "barchart",
+      "gridPos": {
+        "x": 0,
+        "y": 4,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": "cloudwatch",
+      "targets": [
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "EC2Findings",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "A",
+          "alias": "EC2"
+        },
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "EBSFindings",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "B",
+          "alias": "EBS"
+        },
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "S3Findings",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "C",
+          "alias": "S3"
+        },
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "K8sFindings",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "D",
+          "alias": "Kubernetes"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "title": "Monthly Waste Over Time",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 12,
+        "w": 24,
+        "h": 8
+      },
+      "datasource": "cloudwatch",
+      "targets": [
+        {
+          "datasource": "cloudwatch",
+          "namespace": "FinOps/CostOptimization",
+          "metricName": "TotalMonthlyWaste",
+          "dimensions": {
+            "Tool": "FinOps"
+          },
+          "statistic": "Maximum",
+          "period": "300",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "color": {
+            "mode": "palette-classic"
+          }
+        }
+      }
+    }
+  ]
+}
