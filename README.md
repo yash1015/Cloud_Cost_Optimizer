@@ -1,19 +1,18 @@
-Cloud Cost Optimization Platform (FinOps Tool)
+Cloud Cost Optimization Platform
 
-Purpose:
-A tool that detects wasted AWS resources and shows potential cost savings.
+A FinOps tool that detects wasted AWS resources and highlights potential cost savings.
 
-Key Features
+Features
 
 Detects idle EC2 instances (CPU < 5% for 7 days)
 
 Finds unattached EBS volumes
 
-Identifies S3 buckets without lifecycle policies / wrong storage class
+Flags S3 buckets without lifecycle policies / incorrect storage class
 
 Detects over-provisioned Kubernetes pods
 
-Shows savings insights via Grafana dashboard
+Displays savings insights via Grafana dashboard
 
 Sends Slack alerts
 
@@ -32,51 +31,35 @@ Kubernetes Metrics Server
 Grafana
 
 Project Structure
+finops-tool/
+├── collectors/      # AWS resource collectors
+├── engine/          # Waste detection & cost calculations
+├── alerts/          # Slack notifications
+├── dashboard/       # Grafana dashboard
+├── lambda_handler.py
+└── requirements.txt
+Setup
+git clone https://github.com/YOUR_USERNAME/finops-tool.git
+cd finops-tool
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
-collectors/ – AWS resource data collectors (EC2, EBS, S3, K8s)
+Configure credentials:
 
-engine/ – Waste detection and cost calculation
+cp .env.example .env
 
-alerts/ – Slack notifications
+Run the tool:
 
-dashboard/ – Grafana dashboard configuration
-
-lambda_handler.py – Main execution file
-
-Setup Steps
-
-Clone repository
-
-Create Python virtual environment
-
-Install dependencies
-
-Configure AWS credentials in .env
-
-Run the tool
-
+python lambda_handler.py
 Example Result
 
-First scan detected $962/year in wasted cloud resources:
+First scan detected ~$962/year in cloud waste:
 
 9 over-provisioned Kubernetes pods
 
 1 S3 bucket without lifecycle policy
 
-Environment Variables
+Dashboard
 
-AWS_ACCESS_KEY_ID – AWS access key
-
-AWS_SECRET_ACCESS_KEY – AWS secret key
-
-AWS_REGION – AWS region
-
-EC2_CPU_IDLE_THRESHOLD – Idle CPU threshold
-
-EC2_IDLE_DAYS – Idle detection period
-
-K8S_CPU_THRESHOLD / K8S_MEMORY_THRESHOLD – K8s resource thresholds
-
-S3_DAYS_SINCE_LAST_ACCESS – S3 access limit
-
-SLACK_WEBHOOK_URL – Slack alert webhook
+Import dashboard/grafana_dashboard.json into Grafana with a CloudWatch datasource.
